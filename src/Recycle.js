@@ -4,7 +4,6 @@ import { Tooltip, Popconfirm, Button, Table } from 'antd';
 import { Link } from 'react-router-dom';
 import '@/assets/css/IssueLocation.css';
 import { get } from '@/request';
-import * as urlConfig from '@/urlConfig';
 import './Recycle.css';
 import intl from 'react-intl-universal';
 
@@ -31,7 +30,12 @@ class Recycle extends React.Component {
         if ('AbortController' in window) {
             this.controller.abort();
         }
+        this.getSnapshotBeforeUpdate("","");
     };
+
+    getSnapshotBeforeUpdate(prevProps, prevState) {
+
+    }
 
     getProjectData() {
         const getProjectsUrl = urlConfig.addProject + '?recycled=1';
@@ -226,14 +230,5 @@ class Recycle extends React.Component {
         );
     }
 }
-
-//获得屏幕可视宽度
-// const getWinWidth = () => {
-//   if (window.innerWidth) winWidth = window.innerWidth;
-//   else if (document.body && document.body.clientWidth)
-//     winWidth = document.body.clientWidth;
-//   if (document.documentElement && document.documentElement.clientWidth)
-//     winWidth = document.documentElement.clientWidth;
-// };
 
 export default Recycle;

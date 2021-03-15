@@ -7,7 +7,6 @@ import { Input, Button, Checkbox } from 'antd';
 import { LoginGet, get } from '@/request';
 import './styles.css';
 import intl from 'react-intl-universal';
-import { Base64 } from 'js-base64';
 
 //表单
 const FormItem = Form.Item;
@@ -35,10 +34,6 @@ class LoginForm extends React.Component {
                     if (data.code === 200) {
                         sessionStorage.setItem('userToken', data.data.token);
                         sessionStorage.setItem('userName', data.data.username);
-                        // 测试
-                        // sessionStorage.setItem("userName",'matt cheng');
-                        // sessionStorage.setItem("userRight",'1')
-                        // sessionStorage.setItem("userRole",'L')
                         sessionStorage.setItem('type', 'sonarqube');
                         sessionStorage.setItem('right', data.data.right);
                         const getUserRightUrl =
@@ -52,30 +47,6 @@ class LoginForm extends React.Component {
                                             supRole = '';
                                         for (let project of d) {
                                             allRole.push(project.account_role);
-                                        }
-                                        if (allRole.includes('M')) {
-                                            supRole = 'M';
-                                        } else if (allRole.includes('L')) {
-                                            supRole = 'L';
-                                        } else {
-                                            supRole = 'P';
-                                            // accountName和developer对应关系
-                                            const getPersonInfoUrl = urlConfig.getPersonInfo;
-                                            get(
-                                                getPersonInfoUrl,
-                                                sessionStorage.getItem('userToken'),
-                                            ).then((e) => {
-                                                if (e.code === 200 && e.data) {
-                                                    for (let person of e.data) {
-                                                        if (person.accountName === data.data.username) {
-                                                            sessionStorage.setItem('developer', e.data.name);
-                                                        }
-                                                    }
-                                                }
-                                            });
-                                            window.location.href =
-                                                urlConfig.homepage + 'developerPortrait';
-                                            // window.location.href= "http://localhost:3000/developerPortrait";
                                         }
                                         sessionStorage.setItem('userRole', supRole);
                                     } else {
@@ -130,10 +101,10 @@ class LoginForm extends React.Component {
                         })(
                             <div>
                                 <div className={'formItemTitle'}>{intl.get('Password')}</div>
-                                <Input
-                                    type="password"
-                                    placeholder={intl.get('input password')}
-                                />
+                                {/*<Input*/}
+                                {/*    type="password"*/}
+                                {/*    placeholder={intl.get('input password')}*/}
+                                {/*/>*/}
                             </div>,
                         )}
                     </FormItem>
@@ -153,7 +124,6 @@ class LoginForm extends React.Component {
                         >
                             {intl.get('Log in')}
                         </Button>
-                        {/*<br />*/}
                         {intl.get('Or')}{' '}
                         <Link to={`${urlConfig.projectRoot}/register`}>
                             {intl.get('register now!')}
