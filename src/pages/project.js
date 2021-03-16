@@ -22,7 +22,6 @@ class LoginForm extends React.Component {
             const GetUrl =
                 urlConfig.LoginUrl +
                 '?username=' +
-                values.userName +
                 '&password=' +
                 Base64.encode(values.password);
             // console.log(values.password);
@@ -32,7 +31,7 @@ class LoginForm extends React.Component {
                     console.log(data.error.message || 'login failed');
                 } else {
                     if (data.code === 200) {
-                        sessionStorage.setItem('userToken', data.data.token);
+                        sessionStorage.setItem("test", data.data.token);
                         sessionStorage.setItem('userName', data.data.username);
                         sessionStorage.setItem('type', 'sonarqube');
                         sessionStorage.setItem('right', data.data.right);
@@ -62,12 +61,12 @@ class LoginForm extends React.Component {
         });
     };
     login = () => {
+        add();
         this.props.Authenticated.authenticate(() => {
             this.props.onClicked({ redirectToReferrer: true });
         });
     };
     render() {
-        const { getFieldDecorator } = this.props.form;
         return (
             <div>
                 <div id={'loginFormTitle'}>
