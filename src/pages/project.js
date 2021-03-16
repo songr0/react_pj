@@ -60,12 +60,11 @@ class LoginForm extends React.Component {
             });
         });
     };
-    login = () => {
-        add();
-        this.props.Authenticated.authenticate(() => {
-            this.props.onClicked({ redirectToReferrer: true });
-        });
-    };
+
+    test(){
+        
+    }
+
     render() {
         return (
             <div>
@@ -135,5 +134,5 @@ class LoginForm extends React.Component {
 }
 
 //登陆框组件必须用WrappedNormalLoginForm不然报错
-const WrappedNormalLoginForm = Form.create()(LoginForm);
+const WrappedNormalLoginForm = null;
 export default WrappedNormalLoginForm;
